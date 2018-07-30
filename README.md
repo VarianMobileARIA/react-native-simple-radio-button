@@ -86,37 +86,41 @@ Pro
   formHorizontal={true}
   animation={true}
 >
-  <RadioButton labelHorizontal={true} key={i} >
-    {/*  You can set RadioButtonLabel before RadioButtonInput */}
-    <RadioButtonInput
-      obj={obj}
-      index={i}
-      isSelected={this.state.value3Index === i}
-      onPress={onPress}
-      borderWidth={1}
-      buttonInnerColor={'#e74c3c'}
-      buttonOuterColor={this.state.value3Index === i ? '#2196f3' : '#000'}
-      buttonSize={40}
-      buttonOuterSize={80}
-      buttonStyle={{}}
-      buttonWrapStyle={{marginLeft: 10}}
-    />
-    <RadioButtonLabel
-      obj={obj}
-      index={i}
-      labelHorizontal={true}
-      onPress={onPress}
-      labelStyle={{fontSize: 20, color: '#2ecc71'}}
-      labelWrapStyle={{}}
-    />
-  </RadioButton>
+  {/* To create radio buttons, loop through your array of options */}
+  {radio_props.map((obj, i) => {
+    <RadioButton labelHorizontal={true} key={i} >
+      {/*  You can set RadioButtonLabel before RadioButtonInput */}
+      <RadioButtonInput
+        obj={obj}
+        index={i}
+        isSelected={this.state.value3Index === i}
+        onPress={onPress}
+        borderWidth={1}
+        buttonInnerColor={'#e74c3c'}
+        buttonOuterColor={this.state.value3Index === i ? '#2196f3' : '#000'}
+        buttonSize={40}
+        buttonOuterSize={80}
+        buttonStyle={{}}
+        buttonWrapStyle={{marginLeft: 10}}
+      />
+      <RadioButtonLabel
+        obj={obj}
+        index={i}
+        labelHorizontal={true}
+        onPress={onPress}
+        labelStyle={{fontSize: 20, color: '#2ecc71'}}
+        labelWrapStyle={{}}
+      />
+      </RadioButton>
+  })}
+  
 </RadioForm>
 ```
 
 # Methods
 
 ## updateIsActiveIndex
-update active radio button
+Updating active radio button forcibly
 
 # Props
 
@@ -128,7 +132,9 @@ radio button value and label array
 callback when radio button clicked.
 
 ### initial (Default: `0`)
-initial selected
+The index of selected radio button. This is used when this component is activated. If you want to
+pass initial as asynchronous, you can use updateIsActiveIndex function.
+> If you want to make it empty initially, please pass `-1`
 
 ### buttonColor(Default: '#2196f3')
 change radio button color
@@ -187,11 +193,6 @@ if you pass false, animation of radio button is disabled
 
 ![Demo](./doc/demo_1.gif)
 
-### animation (Default: `true`)
-if you pass false, animation of radio button is disabled
-
-![Demo](./doc/demo_1.gif)
-
 ### accessible
 indicates accessibility for the individual radio button input and radio button label components
 
@@ -215,11 +216,17 @@ change label position to horizontal
 ### buttonColor
 The button color
 
+### selectedButtonColor
+The selected button color
+
 ### labelColor
 The label color
 
 ### style
 The label style
+
+### wrapStyle
+Styles that are applied to the <View> wrapping the RadioButton component.
 
 ## onPress _*required_
 callback when radio button clicked.
